@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты - ЭЛЬМАКСО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contacts-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-top: 30px;
+        }
+        
+        .contact-info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .contact-item-large {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+            padding-bottom: 25px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .contact-item-large:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .contact-icon-large {
+            font-size: 24px;
+            color: var(--primary);
+            min-width: 50px;
+            text-align: center;
+        }
+        
+        .contact-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .departments {
+            margin-top: 40px;
+        }
+        
+        .department-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .department-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+        
+        .department-card h4 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .map-container {
+            height: 400px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray);
+        }
+        
+        .contact-form {
+            margin-top: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border);
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 150px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .working-hours {
+            margin-top: 30px;
+        }
+        
+        .hours-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            background: white;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .hours-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .hours-table tr:last-child {
+            border-bottom: none;
+        }
+        
+        .hours-table td {
+            padding: 12px 15px;
+        }
+        
+        .hours-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+        <header>
+        <div class="header-top">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bolt"></i>
+                    ЭЛЬМАКСО
+                </a>
+                <div class="contacts">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>8 (800) 555-35-35</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@elmaxo.ru</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="cart.html" class="cart-link">Корзина <span class="cart-count">0</span></a></li>
+                    </ul>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> / <span>Контакты</span>
+        </div>
+        
+        <h1 class="page-title">Контакты</h1>
+        
+        <div class="contacts-section">
+            <div class="contact-info-card">
+                <h2>Контактная информация</h2>
+                
+                <div class="contact-item-large">
+                    <div class="contact-icon-large">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div class="contact-content">
+                        <h3>Адрес офиса и склада</h3>
+                        <p>115432, г. Москва, ул. Электрическая, д. 15</p>
+                        <p><em>Ближайшая станция метро: "Электрозаводская"</em></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item-large">
+                    <div class="contact-icon-large">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="contact-content">
+                        <h3>Телефоны</h3>
+                        <p><strong>Единый телефон:</strong> 8 (800) 555-35-35 (бесплатно по России)</p>
+                        <p><strong>Москва:</strong> +7 (495) 123-45-67</p>
+                        <p><strong>Факс:</strong> +7 (495) 123-45-68</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item-large">
+                    <div class="contact-icon-large">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="contact-content">
+                        <h3>Электронная почта</h3>
+                        <p><strong>Общие вопросы:</strong> info@elmaxo.ru</p>
+                        <p><strong>Отдел продаж:</strong> sales@elmaxo.ru</p>
+                        <p><strong>Техническая поддержка:</strong> support@elmaxo.ru</p>
+                        <p><strong>Поставщикам:</strong> purchase@elmaxo.ru</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item-large">
+                    <div class="contact-icon-large">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="contact-content">
+                        <h3>Режим работы</h3>
+                        <p><strong>Офис и отдел продаж:</strong> Пн-Пт 9:00-19:00</p>
+                        <p><strong>Склад самовывоза:</strong> Пн-Пт 9:00-18:00, Сб 10:00-16:00</p>
+                        <p><strong>Техническая поддержка:</strong> Пн-Пт 9:00-18:00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-info-card">
+                <h2>Схема проезда</h2>
+                <div class="map-container">
+                    <div style="text-align: center; padding: 20px;">
+                        <i class="fas fa-map-marked-alt" style="font-size: 60px; color: #ddd; margin-bottom: 20px;"></i>
+                        <p>Здесь будет карта проезда</p>
+                        <p>Координаты: 55.7824° N, 37.6687° E</p>
+                    </div>
+                </div>
+                
+                <div class="working-hours">
+                    <h3>Часы приема посетителей</h3>
+                    <table class="hours-table">
+                        <tr>
+                            <td>Понедельник</td>
+                            <td>9:00 - 18:00</td>
+                        </tr>
+                        <tr>
+                            <td>Вторник</td>
+                            <td>9:00 - 18:00</td>
+                        </tr>
+                        <tr>
+                            <td>Среда</td>
+                            <td>9:00 - 18:00</td>
+                        </tr>
+                        <tr>
+                            <td>Четверг</td>
+                            <td>9:00 - 18:00</td>
+                        </tr>
+                        <tr>
+                            <td>Пятница</td>
+                            <td>9:00 - 17:00</td>
+                        </tr>
+                        <tr>
+                            <td>Суббота</td>
+                            <td>10:00 - 16:00</td>
+                        </tr>
+                        <tr>
+                            <td>Воскресенье</td>
+                            <td>Выходной</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <div class="departments">
+            <h2>Отделы компании</h2>
+            <div class="department-grid">
+                <div class="department-card">
+                    <h4><i class="fas fa-shopping-cart"></i> Отдел продаж</h4>
+                    <p><strong>Телефон:</strong> 8 (800) 555-35-35 (доб. 1)</p>
+                    <p><strong>Email:</strong> sales@elmaxo.ru</p>
+                    <p>Консультации по товарам, оформление заказов, работа с клиентами</p>
+                </div>
+                
+                <div class="department-card">
+                    <h4><i class="fas fa-headset"></i> Служба поддержки</h4>
+                    <p><strong>Телефон:</strong> 8 (800) 555-35-35 (доб. 2)</p>
+                    <p><strong>Email:</strong> support@elmaxo.ru</p>
+                    <p>Технические консультации, помощь в подборе оборудования</p>
+                </div>
+                
+                <div class="department-card">
+                    <h4><i class="fas fa-truck"></i> Отдел доставки</h4>
+                    <p><strong>Телефон:</strong> 8 (800) 555-35-35 (доб. 3)</p>
+                    <p><strong>Email:</strong> delivery@elmaxo.ru</p>
+                    <p>Контроль отгрузки и доставки заказов, логистика</p>
+                </div>
+                
+                <div class="department-card">
+                    <h4><i class="fas fa-file-contract"></i> Бухгалтерия</h4>
+                    <p><strong>Телефон:</strong> 8 (800) 555-35-35 (доб. 4)</p>
+                    <p><strong>Email:</strong> accounting@elmaxo.ru</p>
+                    <p>Оформление документов, работа с юр. лицами, счета и акты</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="contact-form">
+            <h2>Напишите нам</h2>
+            <form id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Ваше имя *</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="department">Отдел</label>
+                    <select id="department" name="department">
+                        <option value="">Выберите отдел</option>
+                        <option value="sales">Отдел продаж</option>
+                        <option value="support">Техническая поддержка</option>
+                        <option value="delivery">Отдел доставки</option>
+                        <option value="accounting">Бухгалтерия</option>
+                        <option value="general">Общие вопросы</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Сообщение *</label>
+                    <textarea id="message" name="message" placeholder="Опишите ваш вопрос или заказ..." required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-secondary">Отправить сообщение</button>
+            </form>
+        </div>
+        
+        <div class="requisites" style="margin-top: 40px; background: white; padding: 25px; border-radius: 10px; box-shadow: var(--shadow);">
+            <h2>Реквизиты компании</h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div>
+                    <p><strong>Полное наименование:</strong> ООО "ЭЛЬМАКСО"</p>
+                    <p><strong>Юридический адрес:</strong> 115432, г. Москва, ул. Электрическая, д. 15</p>
+                    <p><strong>ИНН:</strong> 7701234567</p>
+                    <p><strong>КПП:</strong> 770101001</p>
+                </div>
+                <div>
+                    <p><strong>ОГРН:</strong> 1123456789000</p>
+                    <p><strong>ОКПО:</strong> 12345678</p>
+                    <p><strong>Расчетный счет:</strong> 40702810123456789012</p>
+                    <p><strong>Банк:</strong> ПАО "Сбербанк", г. Москва</p>
+                    <p><strong>БИК:</strong> 044525225</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>ЭЛЬМАКСО</h3>
+                    <p>Интернет-магазин электротехники и электрооборудования. Более 10 лет на рынке.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html">Кабели и провода</a></li>
+                        <li><a href="catalog.html">Светильники</a></li>
+                        <li><a href="catalog.html">Автоматические выключатели</a></li>
+                        <li><a href="catalog.html">Электрощитовое оборудование</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html" class="active">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Электрическая, д. 15</li>
+                        <li><i class="fas fa-phone"></i> 8 (800) 555-35-35</li>
+                        <li><i class="fas fa-envelope"></i> info@elmaxo.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ООО "ЭЛЬМАКСО". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время.');
+            this.reset();
+        });
+    </script>
+</body>
+</html>

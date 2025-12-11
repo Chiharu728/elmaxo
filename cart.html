@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - ЭЛЬМАКСО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Дополнительные стили для улучшенной корзины */
+        .cart-item-img-container {
+            width: 100px;
+            height: 100px;
+            background-color: #f1f5f9;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+        
+        .cart-item-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 5px;
+        }
+        
+        .cart-item-info-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .cart-item-unit {
+            font-size: 14px;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .cart-item-price-unit {
+            text-align: center;
+        }
+        
+        .cart-item-price-unit .price {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 18px;
+        }
+        
+        .cart-item-price-unit .unit {
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .cart-quantity-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .quantity-btn-custom {
+            width: 35px;
+            height: 35px;
+            background-color: #f1f5f9;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+        
+        .quantity-btn-custom:hover {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .quantity-display-custom {
+            min-width: 60px;
+            text-align: center;
+            font-weight: 600;
+            padding: 5px 10px;
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+        }
+        
+        .quantity-display-custom input {
+            width: 100%;
+            border: none;
+            text-align: center;
+            font-weight: 600;
+            font-size: 16px;
+            background: transparent;
+        }
+        
+        .cart-item-total-container {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .cart-item-total-price {
+            font-weight: 700;
+            color: var(--dark);
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .cart-header h2 {
+            margin: 0;
+            color: var(--primary);
+        }
+        
+        .delivery-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--gray);
+        }
+        
+        .delivery-info i {
+            color: var(--primary);
+            margin-right: 8px;
+        }
+        
+        .order-summary {
+            background: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            margin-top: 30px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .summary-total {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+            border-bottom: none;
+            padding-top: 15px;
+            margin-top: 10px;
+            border-top: 2px solid var(--border);
+        }
+        
+        .summary-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        /* Для метражных товаров */
+        .unit-meter {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .unit-piece {
+            color: #17a2b8;
+            font-weight: 600;
+        }
+        
+        /* Стили для пустой корзины */
+        .empty-cart {
+            text-align: center;
+            padding: 60px 20px;
+        }
+        
+        .empty-cart-icon {
+            font-size: 80px;
+            color: #e9ecef;
+            margin-bottom: 20px;
+        }
+        
+        .empty-cart h2 {
+            margin-bottom: 10px;
+            color: var(--dark);
+        }
+        
+        .empty-cart p {
+            color: var(--gray);
+            margin-bottom: 20px;
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .cart-item {
+                grid-template-columns: 80px 1fr;
+                grid-template-rows: auto auto auto auto;
+                gap: 15px;
+            }
+            
+            .cart-item-img-container {
+                grid-row: 1 / 3;
+                width: 80px;
+                height: 80px;
+            }
+            
+            .cart-item-info-container {
+                grid-column: 2;
+            }
+            
+            .cart-item-price-unit {
+                grid-column: 2;
+            }
+            
+            .cart-item-actions {
+                grid-column: 2;
+                flex-direction: row;
+                justify-content: flex-start;
+            }
+            
+            .cart-item-total-container {
+                grid-column: 2;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+            }
+            
+            .remove-item {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- Header -->
+        <header>
+        <div class="header-top">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bolt"></i>
+                    ЭЛЬМАКСО
+                </a>
+                <div class="contacts">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>8 (800) 555-35-35</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@elmaxo.ru</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="cart.html" class="cart-link">Корзина <span class="cart-count">0</span></a></li>
+                    </ul>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> / <span>Корзина</span>
+        </div>
+        
+        <h1 class="page-title">Корзина</h1>
+        
+        <div id="cartContent">
+            <!-- Содержимое корзины будет загружено через JavaScript -->
+            <div class="empty-cart">
+                <div class="empty-cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <h2>Ваша корзина пуста</h2>
+                <p>Добавьте товары из каталога, чтобы сделать заказ</p>
+                <a href="catalog.html" class="btn" style="margin-top: 20px;">Перейти в каталог</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>ЭЛЬМАКСО</h3>
+                    <p>Интернет-магазин электротехники и электрооборудования. Более 10 лет на рынке.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html">Кабели и провода</a></li>
+                        <li><a href="catalog.html">Светильники</a></li>
+                        <li><a href="catalog.html">Автоматические выключатели</a></li>
+                        <li><a href="catalog.html">Электрощитовое оборудование</a></li>
+                        <li><a href="catalog.html">Розетки и выключатели</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Электрическая, д. 15</li>
+                        <li><i class="fas fa-phone"></i> 8 (800) 555-35-35</li>
+                        <li><i class="fas fa-envelope"></i> info@elmaxo.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ООО "ЭЛЬМАКСО". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Дополнительный скрипт для страницы корзины
+        document.addEventListener('DOMContentLoaded', function() {
+            // Рендерим корзину при загрузке страницы
+            renderCartPage();
+        });
+    </script>
+</body>
+</html>

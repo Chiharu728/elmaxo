@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров - ЭЛЬМАКСО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .filter-info {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        #currentFilter {
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 16px;
+        }
+        
+        .category-card.active {
+            border: 2px solid var(--primary);
+            background-color: rgba(0, 86, 179, 0.05);
+        }
+        
+        .category-card.active .category-name {
+            color: var(--primary);
+            font-weight: 700;
+        }
+        
+        .category-card.active .category-icon {
+            color: var(--primary);
+        }
+        
+        .no-products {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .no-products i {
+            font-size: 60px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        
+        .product-img-container {
+            position: relative;
+            height: 200px;
+            width: 100%;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            border-radius: 8px 8px 0 0;
+        }
+        
+        .product-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover .product-img-container img {
+            transform: scale(1.05);
+        }
+        
+        .product-img-placeholder {
+            font-size: 60px;
+            color: var(--primary);
+            opacity: 0.7;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        .product-category-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 86, 179, 0.9);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            z-index: 2;
+        }
+        
+        .product-sale-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #dc3545;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 11px;
+            font-weight: 600;
+            z-index: 2;
+        }
+        
+        .product-price-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .product-old-price {
+            text-decoration: line-through;
+            color: #999;
+            font-size: 16px;
+        }
+        
+        .product-save {
+            color: #28a745;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .rating-value {
+            margin-left: 5px;
+            color: #666;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bolt"></i>
+                    ЭЛЬМАКСО
+                </a>
+                <div class="contacts">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>8 (800) 555-35-35</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@elmaxo.ru</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html" class="active">Каталог</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="cart.html" class="cart-link">Корзина <span class="cart-count">0</span></a></li>
+                    </ul>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> / <span>Каталог товаров</span>
+        </div>
+        
+        <h1 class="page-title">Каталог товаров</h1>
+        
+        <div class="categories" id="categoriesContainer">
+            <!-- Категории будут загружены через JavaScript -->
+        </div>
+        
+        <div class="filter-info" style="display: none;" id="filterInfo">
+            <span id="currentFilter">Все товары</span>
+            <button class="btn btn-secondary" style="margin-left: 15px; padding: 5px 10px; font-size: 14px;" id="clearFilterBtn">
+                <i class="fas fa-times"></i> Сбросить фильтр
+            </button>
+        </div>
+        
+        <h2 class="page-title" id="productsTitle">Все товары</h2>
+        <div class="products-grid" id="productsContainer">
+            <!-- Товары будут загружены через JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>ЭЛЬМАКСО</h3>
+                    <p>Интернет-магазин электротехники и электрооборудования. Более 10 лет на рынке.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="#" id="catCables">Кабели и провода</a></li>
+                        <li><a href="#" id="catLights">Светильники</a></li>
+                        <li><a href="#" id="catBreakers">Автоматические выключатели</a></li>
+                        <li><a href="#" id="catShields">Электрощитовое оборудование</a></li>
+                        <li><a href="#" id="catSockets">Розетки и выключатели</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Электрическая, д. 15</li>
+                        <li><i class="fas fa-phone"></i> 8 (800) 555-35-35</li>
+                        <li><i class="fas fa-envelope"></i> info@elmaxo.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2023 ООО "ЭЛЬМАКСО". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Данные товаров с реальными картинками
+        const productsData = [
+            {
+                id: 1,
+                name: "Кабель ВВГнг 3х2,5",
+                category: "Кабели и провода",
+                price: 85.50,
+                rating: 4.5,
+                image: "bolt",
+                mainImage: "https://stroybaza61.ru/wp-content/uploads/2016/10/1e5f298bae36b5789efe4c7748841f34.jpg",
+                description: "Кабель силовой ВВГнг 3х2,5 мм², не распространяющий горение, для стационарной прокладки в электрических сетях номинальным напряжением до 1000 В.",
+                specifications: {
+                    "Сечение": "3х2,5 мм²",
+                    "Количество жил": "3",
+                    "Напряжение": "до 1000 В",
+                    "Материал жилы": "медь",
+                    "Изоляция": "ПВХ пластикат"
+                },
+                sale: true,
+                discount: 15
+            },
+            {
+                id: 2,
+                name: "Светильник LED офисный",
+                category: "Светильники",
+                price: 2450.00,
+                rating: 4.8,
+                image: "lightbulb",
+                mainImage: "https://led-portal.ru/upload/resize_cache/iblock/496/7q1idqsb1214ntpy43xxbqun8wyirn1r/500_500_140cd750bba9870f18aada2478b24840a/ppl_588_g_prisma_36w_4000k_4.jpg",
+                description: "Светодиодный светильник для офисных помещений, мощность 36 Вт, цветовая температура 4000K, степень защиты IP20.",
+                specifications: {
+                    "Мощность": "36 Вт",
+                    "Цветовая температура": "4000K",
+                    "Световой поток": "3600 лм",
+                    "Степень защиты": "IP20",
+                    "Размеры": "600x600 мм"
+                },
+                sale: false
+            },
+            {
+                id: 3,
+                name: "Автоматический выключатель 16А",
+                category: "Автоматические выключатели",
+                price: 320.00,
+                rating: 4.7,
+                image: "toggle-on",
+                mainImage: "https://cdn.vseinstrumenti.ru/images/goods/elektrika-i-svet/ustrojstva-zaschity-kontrolya-i-upravleniya/7772398/560x504/195477687.jpg",
+                description: "Автоматический выключатель однополюсный 16А, характеристика С, для защиты от токов перегрузки и короткого замыкания.",
+                specifications: {
+                    "Номинальный ток": "16 А",
+                    "Количество полюсов": "1",
+                    "Характеристика": "C",
+                    "Напряжение": "230/400 В",
+                    "Отключающая способность": "4,5 кА"
+                },
+                sale: true,
+                discount: 10
+            },
+            {
+                id: 4,
+                name: "Щит распределительный 12 модулей",
+                category: "Электрощитовое оборудование",
+                price: 1250.00,
+                rating: 4.6,
+                image: "th-large",
+                mainImage: "https://khv.energosf.ru/upload/iblock/f02/t2wxj3lux3selxp5wbb6h4mimyaxrm2b/pb40_n_12.jpg",
+                description: "Распределительный щит навесной на 12 модулей, степень защиты IP65, материал корпуса - пластик.",
+                specifications: {
+                    "Количество модулей": "12",
+                    "Материал": "пластик",
+                    "Степень защиты": "IP65",
+                    "Цвет": "белый",
+                    "Размеры": "350x250x120 мм"
+                },
+                sale: false
+            },
+            {
+                id: 5,
+                name: "Розетка двойная с заземлением",
+                category: "Розетки и выключатели",
+                price: 185.00,
+                rating: 4.4,
+                image: "plug",
+                mainImage: "https://ir.ozone.ru/s3/multimedia-f/wc1000/6662494923.jpg",
+                description: "Розетка двойная с заземлением, для скрытой установки, номинальный ток 16А, с защитными шторками.",
+                specifications: {
+                    "Количество гнезд": "2",
+                    "Номинальный ток": "16 А",
+                    "Напряжение": "250 В",
+                    "Заземление": "есть",
+                    "Материал": "термопласт"
+                },
+                sale: true,
+                discount: 20
+            },
+            {
+                id: 6,
+                name: "Лампа светодиодная 10Вт E27",
+                category: "Светильники",
+                price: 120.00,
+                rating: 4.5,
+                image: "lightbulb",
+                mainImage: "https://www.electricmir.ru/content/images/thumbs/0014286_lampa-svetodiodna-led-10vt-e27-bela-94388-nll-a60_300.png",
+                description: "Светодиодная лампа 10Вт, аналог лампы накаливания 75Вт, цоколь E27, цветовая температура 2700K.",
+                specifications: {
+                    "Мощность": "10 Вт",
+                    "Цветовая температура": "2700K",
+                    "Световой поток": "800 лм",
+                    "Цоколь": "E27",
+                    "Срок службы": "25000 ч"
+                },
+                sale: false
+            },
+            {
+                id: 7,
+                name: "Кабель NYM 3х1,5",
+                category: "Кабели и провода",
+                price: 65.30,
+                rating: 4.3,
+                image: "bolt",
+                mainImage: "https://yugkabel.ru/upload/webp/resize_cache/103/600_600_1/z21df8uvyw9dxa5jc84h89tp138v64z5.webp",
+                description: "Кабель NYM 3х1,5 мм², с медными жилами, для стационарной прокладки в сухих и влажных помещениях.",
+                specifications: {
+                    "Сечение": "3х1,5 мм²",
+                    "Количество жил": "3",
+                    "Напряжение": "до 660 В",
+                    "Материал жилы": "медь",
+                    "Изоляция": "ПВХ"
+                },
+                sale: false
+            },
+            {
+                id: 8,
+                name: "Дифференциальный автомат 25А",
+                category: "Автоматические выключатели",
+                price: 1850.00,
+                rating: 4.9,
+                image: "toggle-on",
+                mainImage: "https://shop220.ru/images/data/cat/151159_big_1634901189.jpg",
+                description: "Дифференциальный автомат 25А, двухполюсный, характеристика С, ток утечки 30мА, защита от поражения электрическим током.",
+                specifications: {
+                    "Номинальный ток": "25 А",
+                    "Количество полюсов": "2",
+                    "Ток утечки": "30 мА",
+                    "Характеристика": "C",
+                    "Тип УЗО": "AC"
+                },
+                sale: true,
+                discount: 12
+            },
+            {
+                id: 9,
+                name: "Провод ПВС 3х1,5",
+                category: "Кабели и провода",
+                price: 45.20,
+                rating: 4.2,
+                image: "bolt",
+                mainImage: "https://rkcdn.ru/products/b791d0d2-64d6-11ed-b732-005056013a69/src.jpg",
+                description: "Провод ПВС 3х1,5 мм² для подключения электроприборов и оборудования.",
+                specifications: {
+                    "Сечение": "3х1,5 мм²",
+                    "Количество жил": "3",
+                    "Напряжение": "до 450 В",
+                    "Материал жилы": "медь",
+                    "Изоляция": "ПВХ"
+                },
+                sale: false
+            },
+            {
+                id: 10,
+                name: "Трансформатор 220/12В 50Вт",
+                category: "Трансформаторы",
+                price: 780.00,
+                rating: 4.6,
+                image: "sync-alt",
+                mainImage: "https://m.epool.ru/download/catalog/tb110272_1.png",
+                description: "Трансформатор понижающий 220В на 12В, мощность 50Вт, для систем освещения.",
+                specifications: {
+                    "Мощность": "50 Вт",
+                    "Напряжение входное": "220 В",
+                    "Напряжение выходное": "12 В",
+                    "Тип": "тороидальный",
+                    "Защита": "от КЗ"
+                },
+                sale: true,
+                discount: 8
+            }
+        ];
+
+        // Категории с количеством товаров
+        const categoriesData = [
+            { id: 'all', name: "Все товары", icon: "fas fa-th", count: 10 },
+            { id: 'cables', name: "Кабели и провода", icon: "fas fa-bolt", count: 3 },
+            { id: 'lights', name: "Светильники", icon: "fas fa-lightbulb", count: 2 },
+            { id: 'breakers', name: "Автоматические выключатели", icon: "fas fa-toggle-on", count: 2 },
+            { id: 'shields', name: "Электрощитовое оборудование", icon: "fas fa-th-large", count: 1 },
+            { id: 'sockets', name: "Розетки и выключатели", icon: "fas fa-plug", count: 1 },
+            { id: 'transformers', name: "Трансформаторы", icon: "fas fa-sync-alt", count: 1 }
+        ];
+
+        // Корзина
+        let cart = JSON.parse(localStorage.getItem('elmaxo_cart')) || [];
+        let currentFilter = 'all';
+
+        // Функция для обновления счетчика корзины
+        function updateCartCount() {
+            const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const cartCountElements = document.querySelectorAll('.cart-count');
+            cartCountElements.forEach(el => {
+                el.textContent = count;
+            });
+        }
+
+        // Функция для добавления товара в корзину
+        function addToCart(productId, quantity = 1) {
+            const existingItem = cart.find(item => item.productId === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ productId, quantity });
+            }
+            
+            localStorage.setItem('elmaxo_cart', JSON.stringify(cart));
+            updateCartCount();
+            
+            // Показываем уведомление
+            const product = productsData.find(p => p.id === productId);
+            if (product) {
+                showNotification(`Товар "${product.name}" добавлен в корзину!`);
+            }
+        }
+
+        // Функция для показа уведомления
+        function showNotification(message) {
+            // Создаем элемент уведомления
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <i class="fas fa-check-circle"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Удаляем уведомление через 3 секунды
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease-out';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Функция для получения HTML рейтинга
+        function getRatingStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) {
+                    stars += '<i class="fas fa-star"></i>';
+                } else if (i === Math.ceil(rating) && rating % 1 !== 0) {
+                    stars += '<i class="fas fa-star-half-alt"></i>';
+                } else {
+                    stars += '<i class="far fa-star"></i>';
+                }
+            }
+            return stars;
+        }
+
+        // Функция для отображения категорий
+        function renderCategories() {
+            const categoriesContainer = document.getElementById('categoriesContainer');
+            categoriesContainer.innerHTML = '';
+            
+            categoriesData.forEach(category => {
+                const categoryCard = document.createElement('a');
+                categoryCard.href = '#';
+                categoryCard.className = 'category-card';
+                if (category.id === currentFilter) {
+                    categoryCard.classList.add('active');
+                }
+                
+                categoryCard.innerHTML = `
+                    <div class="category-icon">
+                        <i class="${category.icon}"></i>
+                    </div>
+                    <div class="category-name">${category.name}</div>
+                    <div>${category.count} товар${getCountSuffix(category.count)}</div>
+                `;
+                
+                categoryCard.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    filterProducts(category.id);
+                });
+                
+                categoriesContainer.appendChild(categoryCard);
+            });
+        }
+
+        // Функция для правильного склонения слова "товар"
+        function getCountSuffix(count) {
+            if (count % 10 === 1 && count % 100 !== 11) {
+                return '';
+            } else if (count % 10 >= 2 && count % 10 <= 4 && (count % 100 < 10 || count % 100 >= 20)) {
+                return 'а';
+            } else {
+                return 'ов';
+            }
+        }
+
+        // Функция для отображения товаров
+        function renderProducts() {
+            const productsContainer = document.getElementById('productsContainer');
+            const productsTitle = document.getElementById('productsTitle');
+            const filterInfo = document.getElementById('filterInfo');
+            const currentFilterElement = document.getElementById('currentFilter');
+            
+            // Фильтруем товары
+            let filteredProducts;
+            let categoryName = '';
+            
+            if (currentFilter === 'all') {
+                filteredProducts = productsData;
+                categoryName = 'Все товары';
+                productsTitle.textContent = `${categoryName} (${filteredProducts.length})`;
+                filterInfo.style.display = 'none';
+            } else {
+                // Находим категорию по id
+                const category = categoriesData.find(cat => cat.id === currentFilter);
+                if (category) {
+                    categoryName = category.name;
+                    filteredProducts = productsData.filter(product => {
+                        // Сопоставляем категории товаров с id категорий
+                        const categoryMap = {
+                            'cables': 'Кабели и провода',
+                            'lights': 'Светильники',
+                            'breakers': 'Автоматические выключатели',
+                            'shields': 'Электрощитовое оборудование',
+                            'sockets': 'Розетки и выключатели',
+                            'transformers': 'Трансформаторы'
+                        };
+                        return product.category === categoryMap[currentFilter];
+                    });
+                    
+                    productsTitle.textContent = `${categoryName} (${filteredProducts.length})`;
+                    filterInfo.style.display = 'flex';
+                    currentFilterElement.textContent = categoryName;
+                } else {
+                    filteredProducts = productsData;
+                    categoryName = 'Все товары';
+                    productsTitle.textContent = `${categoryName} (${filteredProducts.length})`;
+                    filterInfo.style.display = 'none';
+                }
+            }
+            
+            // Очищаем контейнер
+            productsContainer.innerHTML = '';
+            
+            // Если товаров нет
+            if (filteredProducts.length === 0) {
+                productsContainer.innerHTML = `
+                    <div class="no-products">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Товары не найдены</h3>
+                        <p>В этой категории пока нет товаров</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Рендерим товары
+            filteredProducts.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card-wrapper';
+                
+                // Цена со скидкой
+                const finalPrice = product.sale ? 
+                    (product.price * (100 - product.discount) / 100).toFixed(2) : 
+                    product.price.toFixed(2);
+                
+                // Создаем HTML для изображения
+                let imageHTML = '';
+                if (product.mainImage) {
+                    imageHTML = `
+                        <img src="${product.mainImage}" 
+                             alt="${product.name}" 
+                             loading="lazy"
+                             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                        <i class="fas fa-${product.image} product-img-placeholder" style="display: none;"></i>
+                    `;
+                } else {
+                    imageHTML = `<i class="fas fa-${product.image} product-img-placeholder"></i>`;
+                }
+                
+                productCard.innerHTML = `
+                    <a href="product-${product.id}.html" class="product-card">
+                        <div class="product-img-container">
+                            ${imageHTML}
+                            ${product.sale ? `<div class="product-sale-badge">-${product.discount}%</div>` : ''}
+                            <div class="product-category-badge">${product.category}</div>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-category">${product.category}</div>
+                            <div class="product-name">${product.name}</div>
+                            <div class="product-rating">
+                                ${getRatingStars(product.rating)}
+                                <span class="rating-value">${product.rating}</span>
+                            </div>
+                            <div class="product-price-container">
+                                <div class="product-price">${finalPrice} ₽</div>
+                                ${product.sale ? `<div class="product-old-price">${product.price.toFixed(2)} ₽</div>` : ''}
+                            </div>
+                            ${product.sale ? `<div class="product-save">Экономия ${(product.price - finalPrice).toFixed(2)} ₽</div>` : ''}
+                        </div>
+                    </a>
+                    <button class="btn btn-block add-to-cart-btn" data-product-id="${product.id}">
+                        <i class="fas fa-shopping-cart"></i> В корзину
+                    </button>
+                `;
+                
+                productsContainer.appendChild(productCard);
+            });
+            
+            // Добавляем обработчики событий для кнопок "В корзину"
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const productId = parseInt(this.getAttribute('data-product-id'));
+                    addToCart(productId);
+                });
+            });
+            
+            // Обработчик ошибок загрузки изображений
+            document.querySelectorAll('.product-img-container img').forEach(img => {
+                img.addEventListener('error', function() {
+                    this.style.display = 'none';
+                    const placeholder = this.nextElementSibling;
+                    if (placeholder && placeholder.classList.contains('product-img-placeholder')) {
+                        placeholder.style.display = 'block';
+                    }
+                });
+            });
+        }
+
+        // Функция фильтрации товаров
+        function filterProducts(categoryId) {
+            currentFilter = categoryId;
+            renderCategories();
+            renderProducts();
+            
+            // Прокручиваем к товарам
+            document.getElementById('productsTitle').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Функция сброса фильтра
+        function clearFilter() {
+            filterProducts('all');
+        }
+
+        // Функция для фильтрации по категории из главной страницы
+        function filterByCategoryFromMainPage() {
+            // Проверяем, есть ли сохраненная категория из главной страницы
+            const savedCategory = localStorage.getItem('selectedCategory');
+            
+            if (savedCategory) {
+                // Сопоставляем название категории с id
+                const categoryMap = {
+                    'Кабели и провода': 'cables',
+                    'Светильники': 'lights',
+                    'Автоматические выключатели': 'breakers',
+                    'Электрощитовое оборудование': 'shields',
+                    'Розетки и выключатели': 'sockets',
+                    'Трансформаторы': 'transformers'
+                };
+                
+                const categoryId = categoryMap[savedCategory];
+                if (categoryId) {
+                    filterProducts(categoryId);
+                }
+                
+                // Очищаем сохраненную категорию
+                localStorage.removeItem('selectedCategory');
+            }
+        }
+
+        // Инициализация при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обновляем счетчик корзины
+            updateCartCount();
+            
+            // Обработчик мобильного меню
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            if (mobileMenuBtn && mainNav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mainNav.classList.toggle('active');
+                });
+            }
+            
+            // Рендерим категории и товары
+            renderCategories();
+            renderProducts();
+            
+            // Проверяем фильтрацию из главной страницы
+            filterByCategoryFromMainPage();
+            
+            // Обработчик кнопки сброса фильтра
+            document.getElementById('clearFilterBtn').addEventListener('click', clearFilter);
+            
+            // Добавляем обработчики для категорий в футере
+            const footerCategories = {
+                'catCables': 'cables',
+                'catLights': 'lights',
+                'catBreakers': 'breakers',
+                'catShields': 'shields',
+                'catSockets': 'sockets'
+            };
+            
+            Object.keys(footerCategories).forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        filterProducts(footerCategories[id]);
+                    });
+                }
+            });
+        });
+
+        // Делаем функции доступными глобально
+        window.addToCart = addToCart;
+        window.filterProducts = filterProducts;
+    </script>
+</body>
+</html>

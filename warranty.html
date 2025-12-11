@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гарантия и возврат - ЭЛЬМАКСО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .warranty-section {
+            margin-top: 30px;
+        }
+        
+        .warranty-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .warranty-period {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        
+        .period-icon {
+            font-size: 40px;
+            color: var(--primary);
+        }
+        
+        .return-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .step-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .conditions-list {
+            margin: 20px 0;
+        }
+        
+        .conditions-list li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .conditions-list li:before {
+            content: "•";
+            color: var(--primary);
+            font-size: 20px;
+            position: absolute;
+            left: 0;
+        }
+        
+        .faq-section {
+            margin-top: 40px;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .faq-question {
+            padding: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .faq-answer.active {
+            padding: 0 20px 20px;
+            max-height: 300px;
+        }
+        
+        .faq-icon {
+            transition: transform 0.3s;
+        }
+        
+        .faq-question.active .faq-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <!-- Header -->
+<header>
+    <div class="header-top">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i>
+                ЭЛЬМАКСО
+            </a>
+            <div class="contacts">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>8 (800) 555-35-35</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@elmaxo.ru</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О компании</a></li>
+                    <li><a href="delivery.html">Доставка и оплата</a></li>
+                    <li><a href="warranty.html">Гарантия и возврат</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="cart.html" class="cart-link">Корзина <span class="cart-count">0</span></a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon">
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> / <span>Гарантия и возврат</span>
+        </div>
+        
+        <h1 class="page-title">Гарантия и возврат</h1>
+        
+        <div class="warranty-section">
+            <div class="warranty-card">
+                <h2>Гарантия на товары</h2>
+                <p>Все товары, представленные в нашем магазине, имеют гарантию от производителя. Срок гарантии зависит от категории товара и указывается в технической документации.</p>
+                
+                <div class="warranty-period">
+                    <div class="period-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div>
+                        <h3>Стандартные гарантийные сроки:</h3>
+                        <ul class="conditions-list">
+                            <li>Электрощитовое оборудование: 3 года</li>
+                            <li>Автоматические выключатели: 2 года</li>
+                            <li>Светильники и осветительные приборы: 1-2 года</li>
+                            <li>Кабельная продукция: 2 года</li>
+                            <li>Монтажные изделия: 1 год</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <p><i class="fas fa-exclamation-triangle"></i> <strong>Внимание!</strong> Гарантия не распространяется на товары с механическими повреждениями, полученными в результате неправильной эксплуатации, а также на расходные материалы.</p>
+                </div>
+                
+                <h3>Условия предоставления гарантии</h3>
+                <ul class="conditions-list">
+                    <li>Сохранение товарного вида и упаковки</li>
+                    <li>Наличие гарантийного талона и чека</li>
+                    <li>Соблюдение правил эксплуатации</li>
+                    <li>Отсутствие следов самостоятельного ремонта</li>
+                    <li>Сохранение заводских пломб и маркировок</li>
+                </ul>
+            </div>
+            
+            <div class="warranty-card">
+                <h2>Возврат товара</h2>
+                <p>Вы можете вернуть товар надлежащего качества в течение 14 дней с момента получения заказа, если он не был в употреблении, сохранены его товарный вид, потребительские свойства, пломбы, фабричные ярлыки, а также имеется товарный чек или иной подтверждающий оплату документ.</p>
+                
+                <h3>Процедура возврата товара</h3>
+                <div class="return-steps">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h4>Оформление заявки</h4>
+                        <p>Свяжитесь с нами по телефону 8 (800) 555-35-35 или напишите на returns@elmaxo.ru</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h4>Подготовка товара</h4>
+                        <p>Упакуйте товар в оригинальную упаковку со всеми аксессуарами и документами</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h4>Отправка товара</h4>
+                        <p>Отправьте товар нам или передайте курьеру при согласовании</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h4>Получение возврата</h4>
+                        <p>После проверки товара мы вернем деньги выбранным вами способом</p>
+                    </div>
+                </div>
+                
+                <div class="warning-box">
+                    <p><i class="fas fa-exclamation-circle"></i> <strong>Важно!</strong> Срок возврата денежных средств составляет до 10 рабочих дней с момента получения товара на наш склад.</p>
+                </div>
+                
+                <h3>Товары, не подлежащие возврату</h3>
+                <p>Согласно законодательству РФ, некоторые товары не подлежат возврату и обмену:</p>
+                <ul class="conditions-list">
+                    <li>Кабельная продукция, отпускаемая метражом</li>
+                    <li>Электроустановочные изделия индивидуального заказа</li>
+                    <li>Товары, изготовленные по специальному заказу</li>
+                    <li>Программное обеспечение</li>
+                </ul>
+            </div>
+            
+            <div class="faq-section">
+                <h2>Часто задаваемые вопросы</h2>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Какой срок гарантии на кабельную продукцию?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>На всю кабельную продукцию предоставляется гарантия 2 года при условии соблюдения правил хранения и эксплуатации.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Можно ли обменять товар, если он не подошел?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Да, вы можете обменять товар надлежащего качества в течение 14 дней с момента покупки, если он не был в употреблении и сохранен товарный вид.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Кто оплачивает доставку при возврате товара?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>При возврате товара надлежащего качества доставку оплачивает покупатель. При возврате бракованного товара - расходы несет продавец.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Как получить гарантийный ремонт?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Обратитесь в нашу службу поддержки по телефону 8 (800) 555-35-35. После диагностики мы направим товар в авторизованный сервисный центр.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-warranty">
+                <h2>Контакты по гарантийным вопросам</h2>
+                <div class="contacts-info">
+                    <p><i class="fas fa-phone"></i> <strong>Телефон гарантийного отдела:</strong> 8 (800) 555-35-35 (доб. 2)</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> warranty@elmaxo.ru</p>
+                    <p><i class="fas fa-clock"></i> <strong>Режим работы:</strong> Пн-Пт 9:00-18:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>ЭЛЬМАКСО</h3>
+                    <p>Интернет-магазин электротехники и электрооборудования. Более 10 лет на рынке.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html">Кабели и провода</a></li>
+                        <li><a href="catalog.html">Светильники</a></li>
+                        <li><a href="catalog.html">Автоматические выключатели</a></li>
+                        <li><a href="catalog.html">Электрощитовое оборудование</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html" class="active">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Электрическая, д. 15</li>
+                        <li><i class="fas fa-phone"></i> 8 (800) 555-35-35</li>
+                        <li><i class="fas fa-envelope"></i> info@elmaxo.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ООО "ЭЛЬМАКСО". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function toggleFaq(element) {
+            element.classList.toggle('active');
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

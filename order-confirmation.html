@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ оформлен - ЭЛЬМАКСО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+        <header>
+        <div class="header-top">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bolt"></i>
+                    ЭЛЬМАКСО
+                </a>
+                <div class="contacts">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>8 (800) 555-35-35</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@elmaxo.ru</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="cart.html" class="cart-link">Корзина <span class="cart-count">0</span></a></li>
+                    </ul>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> / 
+            <a href="cart.html">Корзина</a> / 
+            <span>Заказ оформлен</span>
+        </div>
+        
+        <div id="orderConfirmation">
+            <div class="order-success">
+                <div class="order-success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h1>Заказ успешно оформлен!</h1>
+                <p>Спасибо за ваш заказ в магазине ЭЛЬМАКСО</p>
+                <p>Наш менеджер свяжется с вами в течение 15 минут для подтверждения заказа и уточнения деталей доставки.</p>
+                
+                <div class="order-details" style="margin-top: 30px; background: white; padding: 25px; border-radius: 10px; box-shadow: var(--shadow);">
+                    <h3>Информация о заказе</h3>
+                    <div id="orderInfo">
+                        <!-- Информация о заказе будет загружена через JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="order-actions" style="margin-top: 30px; display: flex; gap: 15px; flex-wrap: wrap;">
+                    <a href="catalog.html" class="btn">
+                        <i class="fas fa-shopping-bag"></i> Продолжить покупки
+                    </a>
+                    <a href="index.html" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> На главную
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>ЭЛЬМАКСО</h3>
+                    <p>Интернет-магазин электротехники и электрооборудования. Более 10 лет на рынке.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html">Кабели и провода</a></li>
+                        <li><a href="catalog.html">Светильники</a></li>
+                        <li><a href="catalog.html">Автоматические выключатели</a></li>
+                        <li><a href="catalog.html">Электрощитовое оборудование</a></li>
+                        <li><a href="catalog.html">Трансформаторы</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Электрическая, д. 15</li>
+                        <li><i class="fas fa-phone"></i> 8 (800) 555-35-35</li>
+                        <li><i class="fas fa-envelope"></i> info@elmaxo.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ООО "ЭЛЬМАКСО". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCartCount();
+            
+            // Загружаем информацию о заказе
+            const orderInfo = document.getElementById('orderInfo');
+            const order = JSON.parse(localStorage.getItem('elmaxo_last_order'));
+            
+            if (order) {
+                let orderHTML = `
+                    <p><strong>Номер заказа:</strong> #${order.id}</p>
+                    <p><strong>Дата заказа:</strong> ${order.date}</p>
+                    <p><strong>Статус:</strong> <span style="color: #28a745;">Ожидает подтверждения</span></p>
+                    
+                    <div style="margin-top: 20px;">
+                        <h4>Состав заказа:</h4>
+                        <div style="background: #f8f9fa; padding: 15px; border-radius: 5px; margin-top: 10px;">
+                `;
+                
+                order.items.forEach(item => {
+                    const unit = item.productUnit === 'метр' ? 'м' : 'шт';
+                    orderHTML += `
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                            <span>${item.productName}</span>
+                            <span>${item.quantity} ${unit} × ${item.productPrice.toFixed(2)} ₽ = ${(item.quantity * item.productPrice).toFixed(2)} ₽</span>
+                        </div>
+                    `;
+                });
+                
+                orderHTML += `
+                        </div>
+                        <div style="margin-top: 15px; font-size: 18px; font-weight: 600; text-align: right;">
+                            Итого: ${order.total.toFixed(2)} ₽
+                        </div>
+                    </div>
+                `;
+                
+                orderInfo.innerHTML = orderHTML;
+                
+                // Очищаем корзину после оформления заказа
+                localStorage.setItem('elmaxo_cart', JSON.stringify([]));
+                updateCartCount();
+            } else {
+                orderInfo.innerHTML = '<p>Информация о заказе не найдена.</p>';
+            }
+        });
+    </script>
+</body>
+</html>

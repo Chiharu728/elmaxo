@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЭЛЬМАКСО - интернет-магазин электротехники</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <!-- Header -->
+<header>
+    <div class="header-top">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-bolt"></i>
+                ЭЛЬМАКСО
+            </a>
+            <div class="contacts">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>8 (800) 555-35-35</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>info@elmaxo.ru</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О компании</a></li>
+                    <li><a href="delivery.html">Доставка и оплата</a></li>
+                    <li><a href="warranty.html">Гарантия и возврат</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                    <li><a href="cart.html" class="cart-link">Корзина <span class="cart-count">0</span></a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon">
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    <span class="cart-count">0</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="hero">
+            <h1>ЭЛЬМАКСО - электротехника для профессионалов</h1>
+            <p>Более 10 000 наименований электротехнической продукции от ведущих производителей. Доставка по всей России.</p>
+            <a href="catalog.html" class="btn btn-secondary">Перейти в каталог</a>
+        </div>
+        
+        <h2 class="page-title">Категории товаров</h2>
+        <div class="categories">
+            <a href="#" class="category-card" onclick="filterCategory('Кабели и провода')">
+                <div class="category-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="category-name">Кабели и провода</div>
+                <div>3 товара</div>
+            </a>
+            <a href="#" class="category-card" onclick="filterCategory('Светильники')">
+                <div class="category-icon">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="category-name">Светильники</div>
+                <div>2 товара</div>
+            </a>
+            <a href="#" class="category-card" onclick="filterCategory('Автоматические выключатели')">
+                <div class="category-icon">
+                    <i class="fas fa-toggle-on"></i>
+                </div>
+                <div class="category-name">Автоматические выключатели</div>
+                <div>2 товара</div>
+            </a>
+            <a href="#" class="category-card" onclick="filterCategory('Электрощитовое оборудование')">
+                <div class="category-icon">
+                    <i class="fas fa-th-large"></i>
+                </div>
+                <div class="category-name">Электрощитовое оборудование</div>
+                <div>1 товар</div>
+            </a>
+        </div>
+        
+        <h2 class="page-title" style="margin-top: 50px;">Популярные товары</h2>
+        <div class="products-grid">
+            <div class="product-card-wrapper">
+                <a href="product-1.html" class="product-card">
+                    <div class="product-img">
+                        <img src="https://stroybaza61.ru/wp-content/uploads/2016/10/1e5f298bae36b5789efe4c7748841f34.jpg"  alt="">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="product-info">
+<div class="product-category">Кабели и провода</div>
+                        <div class="product-name">Кабель ВВГнг 3х2,5</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <div class="product-price">85.50 ₽</div>
+                    </div>
+                </a>
+                <button class="btn btn-block" onclick="addToCart(1)">В корзину</button>
+            </div>
+            
+            <div class="product-card-wrapper">
+                <a href="product-2.html" class="product-card">
+                    <div class="product-img">
+                        <img src="https://led-portal.ru/upload/resize_cache/iblock/496/7q1idqsb1214ntpy43xxbqun8wyirn1r/500_500_140cd750bba9870f18aada2478b24840a/ppl_588_g_prisma_36w_4000k_4.jpg" alt="">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Светильники</div>
+                        <div class="product-name">Светильник LED офисный</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">2,450.00 ₽</div>
+                    </div>
+                </a>
+                <button class="btn btn-block" onclick="addToCart(2)">В корзину</button>
+            </div>
+            
+            <div class="product-card-wrapper">
+                <a href="product-3.html" class="product-card">
+                    <div class="product-img">
+                        <img src="https://cdn.vseinstrumenti.ru/images/goods/elektrika-i-svet/ustrojstva-zaschity-kontrolya-i-upravleniya/7772398/560x504/195477687.jpg" alt="">
+                        <i class="fas fa-toggle-on"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Автоматические выключатели</div>
+                        <div class="product-name">Автоматический выключатель 16А</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="product-price">320.00 ₽</div>
+                    </div>
+                </a>
+                <button class="btn btn-block" onclick="addToCart(3)">В корзину</button>
+            </div>
+            
+            <div class="product-card-wrapper">
+                <a href="product-4.html" class="product-card">
+                    <div class="product-img">
+                        <img src="https://khv.energosf.ru/upload/iblock/f02/t2wxj3lux3selxp5wbb6h4mimyaxrm2b/pb40_n_12.jpg" alt="">
+                        <i class="fas fa-th-large"></i>
+                    </div>
+                    <div class="product-info">
+                        <div class="product-category">Электрощитовое оборудование</div>
+                        <div class="product-name">Щит распределительный 12 модулей</div>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <div class="product-price">1,250.00 ₽</div>
+                    </div>
+                </a>
+                <button class="btn btn-block" onclick="addToCart(4)">В корзину</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+<h3>ЭЛЬМАКСО</h3>
+                    <p>Интернет-магазин электротехники и электрооборудования. Более 10 лет на рынке.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html">Кабели и провода</a></li>
+                        <li><a href="catalog.html">Светильники</a></li>
+                        <li><a href="catalog.html">Автоматические выключатели</a></li>
+                        <li><a href="catalog.html">Электрощитовое оборудование</a></li>
+                        <li><a href="catalog.html">Розетки и выключатели</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Электрическая, д. 15</li>
+                        <li><i class="fas fa-phone"></i> 8 (800) 555-35-35</li>
+                        <li><i class="fas fa-envelope"></i> info@elmaxo.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ООО "ЭЛЬМАКСО". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Функция фильтрации для главной страницы
+        function filterCategory(categoryName) {
+            // Сохраняем выбранную категорию в localStorage
+            localStorage.setItem('selectedCategory', categoryName);
+            // Переходим на страницу каталога
+            window.location.href = 'catalog.html';
+        }
+    </script>
+</body>
+</html>

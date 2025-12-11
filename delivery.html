@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Доставка и оплата - ЭЛЬМАКСО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .delivery-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .delivery-method {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .delivery-method h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .payment-methods {
+            margin-top: 40px;
+        }
+        
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .payment-card {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .payment-icon {
+            font-size: 40px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .info-box {
+            background: #f8f9fa;
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+        
+        .price-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            box-shadow: var(--shadow);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .price-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+        
+        .price-table td {
+            padding: 15px;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .price-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .price-table tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+        <header>
+        <div class="header-top">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-bolt"></i>
+                    ЭЛЬМАКСО
+                </a>
+                <div class="contacts">
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>8 (800) 555-35-35</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@elmaxo.ru</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header-bottom">
+            <div class="container">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav id="mainNav">
+                    <ul>
+                        <li><a href="index.html">Главная</a></li>
+                        <li><a href="catalog.html">Каталог</a></li>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="cart.html" class="cart-link">Корзина <span class="cart-count">0</span></a></li>
+                    </ul>
+                </nav>
+                <div class="cart-icon">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart fa-lg"></i>
+                        <span class="cart-count">0</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container main-content">
+        <div class="breadcrumbs">
+            <a href="index.html">Главная</a> / <span>Доставка и оплата</span>
+        </div>
+        
+        <h1 class="page-title">Доставка и оплата</h1>
+        
+        <div class="delivery-section">
+            <div class="info-box">
+                <p><i class="fas fa-info-circle"></i> <strong>Внимание!</strong> Стоимость и сроки доставки рассчитываются индивидуально после оформления заказа и подтверждаются менеджером.</p>
+            </div>
+            
+            <h2>Способы доставки</h2>
+            <div class="delivery-methods">
+                <div class="delivery-method">
+                    <h3><i class="fas fa-truck"></i> Курьерская доставка</h3>
+                    <p>Доставка курьером по Москве и Московской области в течение 1-2 рабочих дней.</p>
+                    <ul>
+                        <li>Бесплатно при заказе от 10 000 ₽</li>
+                        <li>Стоимость: от 300 ₽</li>
+                        <li>Время: 9:00 - 21:00</li>
+                    </ul>
+                </div>
+                
+                <div class="delivery-method">
+                    <h3><i class="fas fa-shipping-fast"></i> Доставка по России</h3>
+                    <p>Доставка транспортными компаниями в любой регион России.</p>
+                    <ul>
+                        <li>СДЭК, Деловые Линии, ПЭК</li>
+                        <li>Срок: 3-10 рабочих дней</li>
+                        <li>Стоимость рассчитывается индивидуально</li>
+                    </ul>
+                </div>
+                
+                <div class="delivery-method">
+                    <h3><i class="fas fa-store"></i> Самовывоз</h3>
+                    <p>Заберите заказ самостоятельно с нашего склада.</p>
+                    <ul>
+                        <li>Адрес: г. Москва, ул. Электрическая, д. 15</li>
+                        <li>Время работы: Пн-Пт 9:00-18:00</li>
+                        <li>Предварительно согласуйте время</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h2>Стоимость доставки по Москве</h2>
+            <table class="price-table">
+                <thead>
+                    <tr>
+                        <th>Зона доставки</th>
+                        <th>Срок</th>
+                        <th>Стоимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>В пределах МКАД</td>
+                        <td>1-2 дня</td>
+                        <td>300 ₽ (бесплатно от 10 000 ₽)</td>
+                    </tr>
+                    <tr>
+                        <td>За МКАД (до 10 км)</td>
+                        <td>1-2 дня</td>
+                        <td>500 ₽ (бесплатно от 15 000 ₽)</td>
+                    </tr>
+                    <tr>
+                        <td>Московская область (до 30 км)</td>
+                        <td>2-3 дня</td>
+                        <td>800 ₽ (бесплатно от 20 000 ₽)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="payment-methods">
+                <h2>Способы оплаты</h2>
+                <div class="payment-grid">
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h3>Банковской картой</h3>
+                        <p>Оплата онлайн через безопасный платежный шлюз. Принимаем Visa, MasterCard, МИР</p>
+                    </div>
+                    
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h3>Наличными</h3>
+                        <p>Оплата наличными курьеру при получении заказа или в пункте самовывоза</p>
+                    </div>
+                    
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <i class="fas fa-university"></i>
+                        </div>
+                        <h3>Безналичный расчет</h3>
+                        <p>Для юридических лиц. Работаем с НДС. Отправляем счет на оплату</p>
+                    </div>
+                    
+                    <div class="payment-card">
+                        <div class="payment-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>Электронные деньги</h3>
+                        <p>ЮMoney, QIWI, WebMoney и другие электронные платежные системы</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="delivery-terms">
+                <h2>Условия доставки</h2>
+                <div class="info-box">
+                    <p><strong>Важная информация:</strong></p>
+                    <ul>
+                        <li>Заказы оформленные до 15:00 отправляются в тот же день</li>
+                        <li>Крупногабаритные товары доставляются отдельно</li>
+                        <li>Проверяйте товар при получении в присутствии курьера</li>
+                        <li>Для юридических лиц предусмотрены особые условия поставки</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="contact-delivery">
+                <h2>Вопросы по доставке</h2>
+                <p>Если у вас остались вопросы по доставке или оплате, свяжитесь с нами:</p>
+                <div class="contacts-info">
+                    <p><i class="fas fa-phone"></i> <strong>Телефон:</strong> 8 (800) 555-35-35</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> delivery@elmaxo.ru</p>
+                    <p><i class="fas fa-clock"></i> <strong>Режим работы:</strong> Пн-Пт 9:00-19:00, Сб 10:00-16:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>ЭЛЬМАКСО</h3>
+                    <p>Интернет-магазин электротехники и электрооборудования. Более 10 лет на рынке.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Категории</h3>
+                    <ul>
+                        <li><a href="catalog.html">Кабели и провода</a></li>
+                        <li><a href="catalog.html">Светильники</a></li>
+                        <li><a href="catalog.html">Автоматические выключатели</a></li>
+                        <li><a href="catalog.html">Электрощитовое оборудование</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Информация</h3>
+                    <ul>
+                        <li><a href="about.html">О компании</a></li>
+                        <li><a href="delivery.html" class="active">Доставка и оплата</a></li>
+                        <li><a href="warranty.html">Гарантия и возврат</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Контакты</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> г. Москва, ул. Электрическая, д. 15</li>
+                        <li><i class="fas fa-phone"></i> 8 (800) 555-35-35</li>
+                        <li><i class="fas fa-envelope"></i> info@elmaxo.ru</li>
+                        <li><i class="fas fa-clock"></i> Пн-Пт: 9:00-19:00</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 ООО "ЭЛЬМАКСО". Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
